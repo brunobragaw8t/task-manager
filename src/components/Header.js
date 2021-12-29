@@ -19,6 +19,12 @@ export const Header = () => {
 
     setTitle('');
     setDueDate('');
+
+    document.querySelector('.form-response').innerHTML = '<div class="alert alert-success mt-3 mb-0">Task created successfully!</div>';
+
+    setTimeout(() => {
+      document.querySelector('.form-response').innerHTML = '';
+    }, 5000);
   }
 
   return (
@@ -46,10 +52,10 @@ export const Header = () => {
                 <div className="mb-3">
                   <label htmlFor="title" className="form-label">Title</label>
 
-                  <input type="text" className="form-control" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                  <input type="text" className="form-control" id="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
                 </div>
 
-                <div className="mb-3">
+                <div>
                   <label htmlFor="due-date" className="form-label">Due date</label>
 
                   <DatePicker
@@ -58,14 +64,18 @@ export const Header = () => {
                     dateFormat="yyyy-MM-dd"
                     selected={dueDate}
                     onChange={(date) => setDueDate(date)}
+                    autoComplete="off"
+                    required
                   />
                 </div>
+
+                <div className="form-response"></div>
               </div>
 
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
-                <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Create</button>
+                <button type="submit" className="btn btn-primary">Create</button>
               </div>
             </form>
           </div>
