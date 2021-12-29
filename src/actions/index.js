@@ -7,3 +7,10 @@ export const storeTask = (title, dueDate) => {
     },
   }
 }
+
+export const completeTask = (id) => {
+  return {
+    type: 'COMPLETE_TASK',
+    payload: id,
+  }
+}

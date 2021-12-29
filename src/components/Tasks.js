@@ -4,14 +4,22 @@ import { Task } from './Task';
 export const Tasks = () => {
   const tasks = useSelector(state => state.tasks);
 
+  const todo = [...tasks].filter(task => !task.completed).sort((a, b) => {
+    return new Date(a.dueDate) - new Date(b.dueDate);
+  });
+
+  const completed = [...tasks].filter(task => task.completed).sort((a, b) => {
+    return new Date(a.dueDate) - new Date(b.dueDate);
+  });
+
   return (
     <div className="py-5">
       <div className="container">
         <h4 className="mb-0 text-center">To-do</h4>
 
-        {tasks.length ? (
+        {todo.length ? (
           <div className="tasks-list">
-            {tasks.map(task => (
+            {todo.map(task => (
               <Task row={task} />
             ))}
           </div>
@@ -21,7 +29,19 @@ export const Tasks = () => {
           </div>
         )}
 
-        <h4 className="mt-5 text-center">Completed tasks</h4>
+        <h4 className="mt-5 mb-0 text-center">Completed tasks</h4>
+
+        {completed.length ? (
+          <div className="tasks-list">
+            {completed.map(task => (
+              <Task row={task} />
+            ))}
+          </div>
+        ) : (
+          <div className="alert alert-info mt-3">
+            You haven't completed any tasks.
+          </div>
+        )}
       </div>
     </div>
   )

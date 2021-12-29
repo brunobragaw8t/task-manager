@@ -1,4 +1,9 @@
+import { useDispatch } from 'react-redux';
+import { completeTask } from '../actions';
+
 export const Task = ({ row }) => {
+  const dispatch = useDispatch();
+
   const dueDate = new Date(row.dueDate);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -14,6 +19,10 @@ export const Task = ({ row }) => {
     dueDateIcon = 'exclamation-triangle';
   }
 
+  const markCompletedTask = (id) => {
+    dispatch(completeTask(id));
+  }
+
   return (
     <div key={row.id} className="tasks-item mt-3">
       <div className="card">
@@ -27,16 +36,33 @@ export const Task = ({ row }) => {
             &nbsp;
             Due date:
             &nbsp;
-            <span
-              className={dueDateColor}
-            >
-              {row.dueDate}
 
-              {dueDateIcon && (
-                <i className={`ms-1 bi bi-${dueDateIcon}`}></i>
-              )}
-            </span>
+            {!row.completed ? (
+              <span className={dueDateColor}>
+                {row.dueDate}
+
+                {dueDateIcon && (
+                  <i className={`ms-1 bi bi-${dueDateIcon}`}></i>
+                )}
+              </span>
+            ) : (
+              <span>
+                {row.dueDate}
+              </span>
+            )}
           </p>
+
+          {!row.completed && (
+            <button
+              type="button"
+              className="btn btn-light btn-sm"
+              onClick={() => markCompletedTask(row.id)}
+            >
+              <i className="bi bi-check-square text-success"></i>
+              &nbsp;
+              Mark as completed
+            </button>
+          )}
         </div>
       </div>
     </div>
