@@ -9,6 +9,7 @@ const tasksReducer = (state = [], action) => {
           id: id,
           title: action.payload.title,
           dueDate: action.payload.dueDate,
+          completed: false,
         },
       ];
 
