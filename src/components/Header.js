@@ -1,9 +1,25 @@
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
+import { useDispatch } from 'react-redux';
+import { storeTask } from '../actions';
 
 export const Header = () => {
   const [title, setTitle] = useState('')
   const [dueDate, setDueDate] = useState('');
+
+  const dispatch = useDispatch();
+
+  const createTask = (e) => {
+    e.preventDefault();
+
+    dispatch(storeTask(
+      title,
+      dueDate.toISOString().slice(0, 10).replace('T', ' ')
+    ));
+
+    setTitle('');
+    setDueDate('');
+  }
 
   return (
     <header className="py-4 bg-light">
@@ -16,7 +32,10 @@ export const Header = () => {
 
         <div className="modal fade" id="create-task" tabIndex="-1" aria-labelledby="create-task-label" aria-hidden="true">
           <div className="modal-dialog">
-            <form className="modal-content">
+            <form
+              className="modal-content"
+              onSubmit={createTask}
+            >
               <div className="modal-header">
                 <h5 className="modal-title" id="create-task-label">Create task</h5>
 
@@ -46,7 +65,7 @@ export const Header = () => {
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
-                <button type="submit" className="btn btn-primary">Create</button>
+                <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Create</button>
               </div>
             </form>
           </div>
