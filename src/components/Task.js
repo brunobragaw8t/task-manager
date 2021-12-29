@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { completeTask, uncompleteTask } from '../actions';
+import { completeTask, uncompleteTask, destroyTask } from '../actions';
 
 export const Task = ({ row }) => {
   const dispatch = useDispatch();
@@ -25,6 +25,10 @@ export const Task = ({ row }) => {
 
   const markUncompletedTask = (id) => {
     dispatch(uncompleteTask(id));
+  }
+
+  const deleteTask = (id) => {
+    dispatch(destroyTask(id));
   }
 
   return (
@@ -55,7 +59,9 @@ export const Task = ({ row }) => {
               </span>
             )}
           </p>
+        </div>
 
+        <div className="card-footer d-flex justify-content-between">
           {!row.completed ? (
             <button
               type="button"
@@ -77,6 +83,14 @@ export const Task = ({ row }) => {
               Mark as uncompleted
             </button>
           )}
+
+          <button
+            type="button"
+            className="btn btn-danger btn-sm"
+            onClick={() => deleteTask(row.id)}
+          >
+            <i className="bi bi-trash"></i>
+          </button>
         </div>
       </div>
     </div>

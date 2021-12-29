@@ -21,3 +21,10 @@ export const uncompleteTask = (id) => {
     payload: id,
   }
 }
+
+export const destroyTask = (id) => {
+  return {
+    type: 'DESTROY_TASK',
+    payload: id,
+  }
+}

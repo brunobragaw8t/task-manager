@@ -38,6 +38,10 @@ const tasksReducer = (state = [], action) => {
       return tasks;
     }
 
+    case 'DESTROY_TASK': {
+      return state.filter(task => task.id !== action.payload);
+    }
+
     default:
       return state;
   }
