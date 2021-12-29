@@ -1,0 +1,21 @@
+/**
+ * Variables
+ */
+
+// Container
+$container-max-widths: (
+  sm: 500px,
+  md: 500px,
+  lg: 500px,
+  xl: 500px,
+  xxl: 500px
+);
+
+
+/**
+ * Modules
+ */
+
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-icons/font/bootstrap-icons.scss';
+@import '~react-datepicker/dist/react-datepicker.css';
