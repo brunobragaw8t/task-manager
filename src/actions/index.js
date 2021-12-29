@@ -14,3 +14,10 @@ export const completeTask = (id) => {
     payload: id,
   }
 }
+
+export const uncompleteTask = (id) => {
+  return {
+    type: 'UNCOMPLETE_TASK',
+    payload: id,
+  }
+}

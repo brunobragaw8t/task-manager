@@ -1,6 +1,6 @@
 const tasksReducer = (state = [], action) => {
   switch (action.type) {
-    case 'STORE_TASK':
+    case 'STORE_TASK': {
       const id = state.length ? Math.max(...state.map(task => task.id)) + 1 : 1;
 
       return [
@@ -12,8 +12,9 @@ const tasksReducer = (state = [], action) => {
           completed: false,
         },
       ];
+    }
 
-    case 'COMPLETE_TASK':
+    case 'COMPLETE_TASK': {
       const tasks = [...state];
 
       for (let i = 0; i < tasks.length; i++) {
@@ -23,6 +24,19 @@ const tasksReducer = (state = [], action) => {
       }
 
       return tasks;
+    }
+
+    case 'UNCOMPLETE_TASK': {
+      const tasks = [...state];
+
+      for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].id == action.payload) {
+          tasks[i].completed = false;
+        }
+      }
+
+      return tasks;
+    }
 
     default:
       return state;

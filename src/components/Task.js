@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { completeTask } from '../actions';
+import { completeTask, uncompleteTask } from '../actions';
 
 export const Task = ({ row }) => {
   const dispatch = useDispatch();
@@ -21,6 +21,10 @@ export const Task = ({ row }) => {
 
   const markCompletedTask = (id) => {
     dispatch(completeTask(id));
+  }
+
+  const markUncompletedTask = (id) => {
+    dispatch(uncompleteTask(id));
   }
 
   return (
@@ -52,7 +56,7 @@ export const Task = ({ row }) => {
             )}
           </p>
 
-          {!row.completed && (
+          {!row.completed ? (
             <button
               type="button"
               className="btn btn-light btn-sm"
@@ -61,6 +65,16 @@ export const Task = ({ row }) => {
               <i className="bi bi-check-square text-success"></i>
               &nbsp;
               Mark as completed
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-light btn-sm"
+              onClick={() => markUncompletedTask(row.id)}
+            >
+              <i className="bi bi-x-square text-danger"></i>
+              &nbsp;
+              Mark as uncompleted
             </button>
           )}
         </div>
